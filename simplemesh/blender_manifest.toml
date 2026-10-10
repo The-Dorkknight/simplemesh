@@ -1,0 +1,18 @@
+schema_version = "1.0.0"
+
+id = "simplemesh"
+version = "0.5.0"
+name = "SimpleMesh"
+tagline = "STL-first workspace: millimetres, auto-scaled import, always-centred view"
+maintainer = "Matthew Armstrong <The-Dorkknight@users.noreply.github.com>"
+type = "add-on"
+
+website = "https://github.com/The-Dorkknight/simplemesh"
+tags = ["3D View", "Import-Export", "Mesh"]
+
+blender_version_min = "4.2.0"
+license = ["SPDX:GPL-3.0-only"]
+copyright = ["2026 Matthew Armstrong"]
+
+[permissions]
+files = "Open and save STL files you choose"

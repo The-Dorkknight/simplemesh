@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SimpleMesh</title>
+<meta name="description" content="SimpleMesh: a decluttered STL workspace for Blender. Free software, GPL-3.0. Work in progress.">
+<link rel="icon" href="images/favicon-64.png"><link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<style>
+:root{--bg:#f4f5f7;--fg:#1c1f24;--card:#fff;--mut:#5a616b;--acc:#0a7f99;--warn:#ffb81a;--line:#d8dce2}
+@media(prefers-color-scheme:dark){:root{--bg:#0e131a;--fg:#e8eaed;--card:#17202a;--mut:#9aa3ad;--line:#2d343b;--acc:#35d6f5}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,sans-serif}
+main{max-width:980px;margin:0 auto;padding:0 16px 40px}
+.wip{background:var(--warn);color:#1c1f24;font-weight:700;text-align:center;padding:8px 12px}
+.hero{text-align:center;padding:32px 0 12px}.hero img.ic{width:96px;height:96px}
+h1{margin:.2em 0}.tag{color:var(--mut)}
+img.shot{width:100%;height:auto;border-radius:8px;border:1px solid var(--line);margin:14px 0}
+.btn{display:inline-block;background:var(--acc);color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;margin:6px}
+@media(prefers-color-scheme:dark){.btn{color:#041016}}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:22px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}.card h3{margin:.1em 0 .3em}
+code,pre{background:var(--card);border:1px solid var(--line);border-radius:6px}code{padding:1px 5px}pre{padding:10px;overflow:auto}
+table{border-collapse:collapse;width:100%;display:block;overflow:auto}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}
+footer{border-top:1px solid var(--line);margin-top:30px;padding-top:16px;color:var(--mut);font-size:14px}a{color:var(--acc)}
+.note{color:var(--mut);font-size:14px}
+</style></head><body>
+<div class="wip">WORK IN PROGRESS: MANY FEATURES MAY BE BROKEN &middot; 0.5.0-wip</div>
+<main>
+<section class="hero">
+<img class="ic" src="images/icon-512.png" alt="">
+<h1>SimpleMesh</h1>
+<p class="tag">Blender made simple enough for a ten-year-old to build and print things, with exact STL tools for grown-ups underneath.</p>
+<a class="btn" id="repo" href="https://github.com/The-Dorkknight/simplemesh">View on GitHub</a>
+<a class="btn" id="rel" href="https://github.com/The-Dorkknight/simplemesh/releases">Releases</a>
+<img class="shot" src="images/easy-snowman.webp" alt="Easy mode: picture buttons, a snowman built from shapes, colours and a Print button">
+<p class="note">Real Blender 4.0.2 window on a virtual display, driven by a test script (simulated mouse and keys).</p>
+</section>
+<div class="grid">
+<div class="card"><h3>Big-button panel</h3>Across the top, in every mode: a red button that does the next obvious thing, a badge that says what is active, Find, the tools, and keys for the look.</div>
+<div class="card"><h3>Easy mode</h3>Picture buttons. Click a shape, click where it goes. Shapes sit on each other. Pull the dots to stretch, grow and turn.</div>
+<div class="card"><h3>Draw, Words, Ideas</h3>Draw a loop and it becomes solid. Type your name for 3D letters. Or start from a snowman, rocket or robot.</div>
+<div class="card"><h3>Print!</h3>One button cuts the holes, glues the parts, repairs, checks the size and saves for the printer.</div>
+<div class="card"><h3>Lay flat</h3>Hover: the flat face lights up. Click: it sits on the bed. No Edit Mode.</div>
+<div class="card"><h3>Move, Turn, Size</h3>Drag the model. It stays on the bed. Or type the millimetres or degrees you want.</div>
+<div class="card"><h3>Pull</h3>Point at a flat face and drag it out or in. The part gets longer or shorter. Or type the millimetres.</div>
+<div class="card"><h3>Clay</h3>Mould it: pull, build up, push in, smooth. Seven brushes sized in millimetres; flat faces mould too.</div>
+<div class="card"><h3>Cut</h3>A plane follows the mouse, click to cut. Or drag a line across. Cuts are capped.</div>
+<div class="card"><h3>Hole</h3>A circle follows the mouse on the surface. Click to drill. Type the diameter.</div>
+<div class="card"><h3>Right size from the start</h3>Millimetre scene; oversized imports shrink to fit the bed and land centred. Size is always on screen. F finds the model.</div>
+<div class="card"><h3>Looks</h3>Luminous (dark, cyan) or Clean (light). Rainbow gives each model its own colour. Show the triangles. Hide clutter removes Blender's own rows.</div>
+<div class="card"><h3>No scenery</h3>One big 3D view. No timeline, outliner, camera or lights. A "Full Blender" tab is the way back.</div>
+</div>
+<img class="shot" src="images/panel-clay.webp" alt="The panel while moulding: a red DONE button, a CLAY: PULL badge and the brushes as keys">
+<img class="shot" src="images/easy-dots.webp" alt="The six dots on the chosen shape">
+<img class="shot" src="images/cut.webp" alt="Cut: a red plane follows the mouse over the model">
+<img class="shot" src="images/clay.webp" alt="Clay: a horn pulled out of a flat face with the Pull brush">
+<img class="shot" src="images/hole.webp" alt="Hole: a red circle follows the mouse on the surface">
+<h2>What exists and what doesn't yet</h2>
+<table><tr><th>Exists and tested in a real Blender 4.0.2 window (scripted mouse)</th><th>Not there / not verified yet</th></tr>
+<tr><td>Easy mode, as a scripted session (add, stack, dots, draw, ideas, glue, clay, print). Tools: Lay flat, Move, Turn, Size, Pull, Cut (click or line), Hole, Measure; Clay strokes; the panel's buttons; import auto-fit; F to find; pop-ups</td><td>A person, and especially a child, using it by hand; small screens; trackpads; big real STLs; the panel on any Blender other than 4.0.2</td></tr>
+<tr><td>Mesh work tested without a window on Blender 5.2.2: repair, weld, hole shapes, simplify, export</td><td>The window on Blender 3.x, 4.2+ and 5.x; macOS; Windows; connectors (pins, dovetails)</td></tr></table>
+<h2>Install</h2>
+<ol><li>Download the source and unzip it.</li><li>Double-click <b>Install SimpleMesh</b> for your computer (Linux, Mac or Windows), or run <code>python3 install.py</code>.</li><li>Tick your Blender in the list, press <b>Install or update</b>, then <b>Open Blender</b>. It starts in Easy mode.</li></ol>
+<img class="shot" src="images/installer.webp" alt="The installer window listing the Blenders found, with ticks and versions">
+<p>Manual zip install and troubleshooting are in the <a id="readme" href="https://github.com/The-Dorkknight/simplemesh#readme">README</a>.</p>
+<footer>Free software, GPL-3.0-only. Copyright (C) 2026 Matthew Armstrong. No warranty, no liability; use at your own risk. Not legal advice. Not affiliated with the Blender Foundation. Blender is a trademark of the Blender Foundation.</footer>
+</main>
+<script>
+(function(){var o="The-Dorkknight",r="simplemesh",h=location.hostname,p=location.pathname.split("/").filter(Boolean);
+if(/\.github\.io$/.test(h)){o=h.split(".")[0];if(p[0])r=p[0];}
+var b="https://github.com/"+o+"/"+r;
+document.getElementById("repo").href=b;document.getElementById("rel").href=b+"/releases";document.getElementById("readme").href=b+"#readme";})();
+</script></body></html>

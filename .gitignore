@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*.log
+.venv/
+venv/
+*.jks
+*.keystore
+build/
+dist/
+*.blend1
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+install_log.txt

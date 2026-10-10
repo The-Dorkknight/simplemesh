@@ -1,0 +1,41 @@
+name: build
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -r requirements-dev.txt
+      - run: python tests/test_headless.py
+      - run: python tools/build_zip.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: simplemesh-zips
+          path: dist/*.zip
+  gui:
+    # Real-window test: Blender from the Ubuntu archive on a virtual display,
+    # driven by simulated mouse and keys. Screenshots are kept as an artifact.
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y --no-install-recommends blender python3-numpy python3-tk xvfb imagemagick libgl1-mesa-dri
+      - run: |
+          xvfb-run -a -s "-screen 0 1600x900x24" blender --factory-startup --enable-event-simulate \
+            --python tests/gui_session.py -- "$RUNNER_TEMP/shots" | tee gui.log
+          grep -q "GUI-DONE  0 failed" gui.log
+      - name: Installer window
+        run: |
+          export HOME="$(mktemp -d)"
+          xvfb-run -a -s "-screen 0 1100x760x24" /usr/bin/python3 tests/test_installer_gui.py "$RUNNER_TEMP/shots"
+          xvfb-run -a -s "-screen 0 1100x760x24" /usr/bin/python3 tests/test_install_launch.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gui-screenshots
+          path: ${{ runner.temp }}/shots/*.png

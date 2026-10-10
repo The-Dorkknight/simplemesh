@@ -1,0 +1,25 @@
+name: release
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: python tools/build_zip.py
+      - name: Create pre-release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          if [ "${GITHUB_REF_TYPE}" != "tag" ]; then TAG="v$(python -c "import re;print(re.search(r'__version__ = \"([^\"]+)\"',open('simplemesh/version.py').read()).group(1))")"; fi
+          gh release view "$TAG" >/dev/null 2>&1 && gh release upload "$TAG" dist/*.zip --clobber || \
+          gh release create "$TAG" dist/*.zip --prerelease --title "SimpleMesh $TAG (work in progress)" \
+            --notes "Work-in-progress pre-release. Install: unzip simplemesh-*-installer.zip and double-click the Install SimpleMesh file for your computer (or install simplemesh-*.zip from Blender's Add-ons preferences). See the README for what is and is not tested."
